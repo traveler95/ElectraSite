@@ -8,6 +8,7 @@ type NavItem = {
   label: string;
   isIcon?: boolean;
   external?: boolean;
+  isV2?: boolean;
   children?: NavItem[];
 };
 
@@ -54,6 +55,7 @@ const navLinks: NavItem[] = [
   { path: "/do-pobrania", label: "Do pobrania" },
   { path: "/zglos-nieprawidlowosc", label: "Zgłoś nieprawidłowość" },
   { path: "/kontakt", label: "Kontakt" },
+  { path: "/v2", label: "V2", isV2: true },
 ];
 
 export function Header() {
@@ -153,6 +155,23 @@ export function Header() {
                     const isHovered = hoveredIndex === index;
                     const hasChildren = !!link.children;
                     const isOpen = openDropdown === link.path;
+
+                    if (link.isV2) {
+                      return (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          className="ml-1 px-2.5 py-1 text-xs font-bold rounded-full border transition-colors"
+                          style={{
+                            color: isActive(link.path) ? "#fff" : "#009bee",
+                            borderColor: "#009bee",
+                            background: isActive(link.path) ? "#009bee" : "transparent",
+                          }}
+                        >
+                          V2
+                        </Link>
+                      );
+                    }
 
                     return (
                       <div
@@ -368,6 +387,21 @@ export function Header() {
               <div className="relative bg-white/80 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-h-[75vh] overflow-y-auto">
                 <div className="p-4 space-y-1">
                   {navLinks.map((link, index) => {
+                    if (link.isV2) {
+                      return (
+                        <motion.div key={link.path} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.04 }}>
+                          <Link
+                            to={link.path}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="inline-flex items-center px-4 py-2 text-sm font-bold border"
+                            style={{ color: "#009bee", borderColor: "#009bee" }}
+                          >
+                            Wersja V2 – Nowy wygląd
+                          </Link>
+                        </motion.div>
+                      );
+                    }
+
                     const active = isParentActive(link);
                     const hasChildren = !!link.children;
                     const isExpanded = expandedMobile === link.path;

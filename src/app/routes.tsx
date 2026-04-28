@@ -12,6 +12,7 @@ import { Contact } from "./pages/Contact";
 import { DoPobrania } from "./pages/DoPobrania";
 import { ZglosNieprawidlowosc } from "./pages/ZglosNieprawidlowosc";
 import { StaticPage } from "./pages/StaticPage";
+import { HomeV2 } from "./pages/HomeV2";
 import { NotFound } from "./pages/NotFound";
 
 export const router = createBrowserRouter([
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
     Component: Root,
     children: [
       { index: true, Component: Home },
+      { path: "v2", Component: HomeV2 },
 
       // O nas
       { path: "o-nas", Component: About },
