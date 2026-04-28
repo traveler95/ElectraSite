@@ -5,9 +5,15 @@ import { ArrowRight, ArrowDown, Phone, Mail, MapPin } from "lucide-react";
 import { api, fileUrl, type Projekt, type Aktualnosc } from "../../lib/directus";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
-const BLUE  = "#009bee";
-const NAVY  = "#004a69";
-const LIGHT = "#f2f6f9";
+/* Electra official colour system (source: electra.co.pl CSS variables)
+   --color-main: #009bee | --color-navy: #42b4f0 | gradient: rgba(0,74,105)→rgba(0,160,227) */
+const BLUE      = "#009bee";  // --color-main        primary electric blue
+const BLUE_DARK = "#0086d4";  //                     hover / darker shade
+const BLUE_SOFT = "#42b4f0";  // --color-navy portal  lighter sky-blue
+const BLUE_MID  = "#00a0e3";  //                     gradient end colour
+const NAVY      = "#004a69";  //                     dark teal (gradient start)
+const NAVY_DEEP = "#2B4A91";  // --color-navy dark    deep navy for headings
+const BG_BLUE   = "#e8f4fd";  //                     very-light-blue section bg
 
 const electraFilter = "grayscale(72%) sepia(44%) brightness(78%) hue-rotate(160deg) saturate(220%) contrast(112%)";
 
@@ -125,13 +131,13 @@ export function HomeV2() {
         </motion.div>
       </section>
 
-      {/* ══ BLUE STRIP ══════════════════════════════════════ */}
-      <section style={{ background: BLUE }}>
+      {/* ══ IDENTITY STRIP — Electra gradient (matches --gradient CSS var) ══ */}
+      <section style={{ background: `linear-gradient(135deg, ${BLUE} 0%, ${BLUE_MID} 100%)` }}>
         <div className="px-[8%] lg:px-[12%] py-12 grid md:grid-cols-2 gap-10 items-center">
           <h2 className="text-white font-black leading-tight" style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)" }}>
             Lider branży instalacyjnej<br />w Polsce od 1954 roku.
           </h2>
-          <p className="text-white/80 leading-relaxed text-sm">
+          <p className="leading-relaxed text-sm" style={{ color: "rgba(255,255,255,0.88)" }}>
             Electra M&E Polska to część międzynarodowej grupy Electra — jednej z wiodących firm inżynieryjnych na świecie. Realizujemy projekty w sektorze biurowym, mieszkaniowym, przemysłowym i energetycznym.
           </p>
         </div>
@@ -139,13 +145,14 @@ export function HomeV2() {
 
       {/* ══ STATS ═══════════════════════════════════════════ */}
       <section ref={statsRef} className="bg-white">
-        <div className="px-[8%] lg:px-[12%] py-20 grid grid-cols-2 lg:grid-cols-4 divide-x divide-gray-100">
+        <div className="px-[8%] lg:px-[12%] py-20 grid grid-cols-2 lg:grid-cols-4" style={{ borderLeft: "none" }}>
           {stats.map((s, i) => (
-            <motion.div key={s.label} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5, delay:i*0.1 }} className="py-6 px-8 first:pl-0">
-              <div className="font-black leading-none mb-2" style={{ fontSize:"clamp(2.5rem,4vw,4.5rem)", color: NAVY }}>
+            <motion.div key={s.label} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5, delay:i*0.1 }}
+              className="py-6 px-8 first:pl-0 border-r last:border-r-0" style={{ borderColor: BG_BLUE }}>
+              <div className="font-black leading-none mb-2" style={{ fontSize:"clamp(2.5rem,4vw,4.5rem)", color: NAVY_DEEP }}>
                 {counts[i]}{s.suffix}
               </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] font-semibold" style={{ color:"#8fa0b0" }}>{s.label}</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] font-semibold" style={{ color: BLUE_SOFT }}>{s.label}</div>
             </motion.div>
           ))}
         </div>
@@ -166,7 +173,7 @@ export function HomeV2() {
         <div className="px-[8%] lg:px-[12%]">
           <div className="flex items-end justify-between mb-14">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>Co robimy</p>
+              <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: BLUE_SOFT }}>Co robimy</p>
               <h2 className="text-white font-black leading-tight" style={{ fontSize: "clamp(2rem,3.5vw,3rem)" }}>Nasza oferta</h2>
             </div>
             <Link to="/nasza-oferta" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white transition-colors">
@@ -177,13 +184,16 @@ export function HomeV2() {
           <div className="grid md:grid-cols-2 gap-[1px] bg-white/10">
             {services.map((s, i) => (
               <motion.div key={s.title} initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ duration:0.4, delay:i*0.08 }}
-                className="group bg-[#004a69] hover:bg-[#005580] transition-colors duration-300 p-10 cursor-pointer relative"
+                className="group p-10 cursor-pointer relative transition-colors duration-300"
+                style={{ background: NAVY }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = NAVY_DEEP}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = NAVY}
               >
-                <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[3px] transition-all duration-300" style={{ background: "rgba(255,255,255,0.25)" }} />
-                <div className="text-white/15 font-black text-4xl mb-6 leading-none select-none">{s.num}</div>
+                <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[3px] transition-all duration-300" style={{ background: BLUE }} />
+                <div className="font-black text-4xl mb-6 leading-none select-none" style={{ color: BLUE + "30" }}>{s.num}</div>
                 <h3 className="text-white font-bold mb-3" style={{ fontSize:"1.05rem" }}>{s.title}</h3>
-                <p className="text-white/55 text-sm leading-relaxed group-hover:text-white/75 transition-colors">{s.desc}</p>
-                <div className="mt-5 flex items-center gap-2 text-xs font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-all" style={{ color: "rgba(255,255,255,0.7)" }}>
+                <p className="text-sm leading-relaxed transition-colors" style={{ color: BLUE_SOFT + "99" }}>{s.desc}</p>
+                <div className="mt-5 flex items-center gap-2 text-xs font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-all" style={{ color: BLUE_SOFT }}>
                   WIĘCEJ <ArrowRight className="w-3 h-3" />
                 </div>
               </motion.div>
@@ -193,12 +203,12 @@ export function HomeV2() {
       </section>
 
       {/* ══ PROJEKTY ════════════════════════════════════════ */}
-      <section className="py-24" style={{ background: LIGHT }}>
+      <section className="py-24" style={{ background: BG_BLUE }}>
         <div className="px-[8%] lg:px-[12%]">
           <div className="flex items-end justify-between mb-14">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: BLUE }}>Nasze realizacje</p>
-              <h2 className="font-black leading-tight" style={{ fontSize:"clamp(2rem,3.5vw,3rem)", color: NAVY }}>Projekty</h2>
+              <h2 className="font-black leading-tight" style={{ fontSize:"clamp(2rem,3.5vw,3rem)", color: NAVY_DEEP }}>Projekty</h2>
             </div>
             <Link to="/projekty" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold hover:opacity-70 transition-opacity" style={{ color: BLUE }}>
               Wszystkie projekty <ArrowRight className="w-4 h-4" />
@@ -244,7 +254,7 @@ export function HomeV2() {
             <div className="flex items-end justify-between mb-14">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: BLUE }}>Co słychać</p>
-                <h2 className="font-black leading-tight" style={{ fontSize:"clamp(2rem,3.5vw,3rem)", color: NAVY }}>Aktualności</h2>
+                <h2 className="font-black leading-tight" style={{ fontSize:"clamp(2rem,3.5vw,3rem)", color: NAVY_DEEP }}>Aktualności</h2>
               </div>
               <Link to="/aktualnosci" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold hover:opacity-70 transition-opacity" style={{ color: BLUE }}>
                 Wszystkie <ArrowRight className="w-4 h-4" />
@@ -256,7 +266,7 @@ export function HomeV2() {
                   className="group cursor-pointer border-t-[3px] pt-6" style={{ borderColor: BLUE }}
                 >
                   {item.miniaturka && (
-                    <div className="aspect-[16/9] overflow-hidden mb-5 bg-gray-100">
+                    <div className="aspect-[16/9] overflow-hidden mb-5" style={{ background: BG_BLUE }}>
                       <ImageWithFallback
                         src={fileUrl(item.miniaturka)} alt={item.tytul}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -267,12 +277,15 @@ export function HomeV2() {
                     </div>
                   )}
                   {item.data_publikacji && (
-                    <p className="text-[10px] uppercase tracking-[0.2em] mb-2" style={{ color:"#8fa0b0" }}>
+                    <p className="text-[10px] uppercase tracking-[0.2em] mb-2" style={{ color: BLUE_SOFT }}>
                       {new Date(item.data_publikacji).toLocaleDateString("pl-PL", { day:"numeric", month:"long", year:"numeric" })}
                     </p>
                   )}
-                  <h3 className="font-bold leading-snug mb-3 group-hover:text-blue-600 transition-colors" style={{ fontSize:"1rem", color: NAVY }}>{item.tytul}</h3>
-                  {item.zajawka && <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">{item.zajawka}</p>}
+                  <h3 className="font-bold leading-snug mb-3 transition-colors" style={{ fontSize:"1rem", color: NAVY_DEEP }}
+                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = BLUE}
+                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = NAVY_DEEP}
+                  >{item.tytul}</h3>
+                  {item.zajawka && <p className="text-sm leading-relaxed line-clamp-3" style={{ color: BLUE_SOFT }}>{item.zajawka}</p>}
                   <div className="mt-4 flex items-center gap-1 text-xs font-bold tracking-widest" style={{ color: BLUE }}>CZYTAJ <ArrowRight className="w-3 h-3" /></div>
                 </motion.div>
               ))}
@@ -321,7 +334,7 @@ export function HomeV2() {
         <div className="relative z-10 px-[8%] lg:px-[12%] grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="w-10 h-[3px] mb-8" style={{ background: BLUE }} />
-            <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-4" style={{ color: BLUE }}>
+            <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-4" style={{ color: BLUE_SOFT }}>
               Gotowi do współpracy
             </p>
             <h2 className="text-white font-black leading-tight mb-6" style={{ fontSize: "clamp(2rem,3.5vw,3rem)" }}>
@@ -332,7 +345,8 @@ export function HomeV2() {
             </p>
             <Link
               to="/kontakt"
-              className="inline-flex items-center gap-3 px-8 py-4 font-bold text-white text-sm tracking-widest border border-white/30 hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-3 px-8 py-4 font-bold text-white text-sm tracking-widest transition-opacity hover:opacity-90"
+              style={{ background: BLUE }}
             >
               NAPISZ DO NAS <ArrowRight className="w-4 h-4" />
             </Link>
@@ -352,8 +366,8 @@ export function HomeV2() {
                   <Icon className="w-5 h-5" style={{ color: BLUE }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest mb-1 text-white/35">{label}</div>
-                  <div className="text-white/80 text-sm whitespace-pre-line leading-relaxed">{value}</div>
+                  <div className="text-[10px] uppercase tracking-widest mb-1" style={{ color: BLUE_SOFT + "66" }}>{label}</div>
+                  <div className="text-sm whitespace-pre-line leading-relaxed" style={{ color: BLUE_SOFT }}>{value}</div>
                 </div>
               </div>
             ))}
