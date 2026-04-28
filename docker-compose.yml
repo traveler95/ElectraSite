@@ -1,0 +1,10 @@
+services:
+  website:
+    build: .
+    restart: unless-stopped
+    networks:
+      - shared-web
+
+networks:
+  shared-web:
+    external: true
