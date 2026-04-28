@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import {
   Target,
   Eye,
@@ -9,16 +9,11 @@ import {
   Shield,
   Lightbulb,
   Heart,
+  ArrowRight,
 } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import { api, fileUrl, type CzlonekZarzadu } from "../../lib/directus";
 
 export function About() {
-  const [team, setTeam] = useState<CzlonekZarzadu[]>([]);
-
-  useEffect(() => {
-    api.zarzad.list().then(setTeam).catch(() => {});
-  }, []);
 
   const values = [
     {
@@ -276,50 +271,16 @@ export function About() {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Team CTA */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Zarząd
-            </h2>
-            <p className="text-xl text-gray-600">
-              Poznaj ekspertów stojących za naszym sukcesem
-            </p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Zarząd</h2>
+            <p className="text-xl text-gray-600 mb-8">Poznaj ekspertów stojących za naszym sukcesem</p>
+            <Link to="/o-nas/zarzad" className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold text-lg">
+              Zobacz zarząd <ArrowRight className="w-5 h-5" />
+            </Link>
           </motion.div>
-
-          {team.length === 0 ? (
-            <p className="text-center text-gray-400">Brak danych o zarządzie.</p>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {team.map((member, index) => (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-gray-200">
-                    <ImageWithFallback
-                      src={fileUrl(member.zdjecie)}
-                      alt={member.imie_nazwisko}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-lg text-gray-900">{member.imie_nazwisko}</h3>
-                  <p className="text-gray-600 text-sm">{member.stanowisko}</p>
-                </motion.div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

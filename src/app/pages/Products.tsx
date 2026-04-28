@@ -1,10 +1,12 @@
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 import { Filter, Search } from "lucide-react";
+import { useParams } from "react-router";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { api, fileUrl, type Projekt, type KategoriaProjektu } from "../../lib/directus";
 
 export function Products() {
+  const { kategoria: kategoriaSlug } = useParams<{ kategoria?: string }>();
   const [projekty, setProjekty] = useState<Projekt[]>([]);
   const [kategorie, setKategorie] = useState<KategoriaProjektu[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | "all">("all");
@@ -18,8 +20,12 @@ export function Products() {
     ]).then(([p, k]) => {
       setProjekty(p);
       setKategorie(k);
+      if (kategoriaSlug) {
+        const match = k.find(cat => cat.slug === kategoriaSlug);
+        if (match) setSelectedCategory(match.id);
+      }
     }).catch(() => {}).finally(() => setLoading(false));
-  }, []);
+  }, [kategoriaSlug]);
 
   const filtered = projekty.filter((p) => {
     const categoryId = typeof p.kategoria === "object" ? (p.kategoria as any).id ?? p.kategoria : p.kategoria;
@@ -48,7 +54,11 @@ export function Products() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Nasze projekty</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+              {selectedCategory !== "all"
+                ? kategorie.find(k => k.id === selectedCategory)?.nazwa ?? "Projekty"
+                : "Nasze projekty"}
+            </h1>
             <p className="text-xl text-blue-100">
               Realizacje, z których jesteśmy dumni — od obiektów biurowych po przemysł energetyczny.
             </p>

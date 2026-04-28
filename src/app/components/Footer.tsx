@@ -65,10 +65,12 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Szybkie linki</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:text-blue-400 transition-colors">Strona główna</Link></li>
-              <li><Link to="/about" className="hover:text-blue-400 transition-colors">O nas</Link></li>
-              <li><Link to="/services" className="hover:text-blue-400 transition-colors">Nasza oferta</Link></li>
-              <li><Link to="/products" className="hover:text-blue-400 transition-colors">Projekty</Link></li>
-              <li><Link to="/contact" className="hover:text-blue-400 transition-colors">Kontakt</Link></li>
+              <li><Link to="/o-nas" className="hover:text-blue-400 transition-colors">O nas</Link></li>
+              <li><Link to="/aktualnosci" className="hover:text-blue-400 transition-colors">Aktualności</Link></li>
+              <li><Link to="/nasza-oferta" className="hover:text-blue-400 transition-colors">Nasza oferta</Link></li>
+              <li><Link to="/projekty" className="hover:text-blue-400 transition-colors">Projekty</Link></li>
+              <li><Link to="/dolacz-do-nas" className="hover:text-blue-400 transition-colors">Dołącz do nas</Link></li>
+              <li><Link to="/kontakt" className="hover:text-blue-400 transition-colors">Kontakt</Link></li>
             </ul>
           </div>
 
@@ -108,8 +110,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center text-gray-500">
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <p>&copy; {currentYear} Electra M&E Polska. Wszelkie prawa zastrzeżone.</p>
+          <div className="flex gap-4">
+            <Link to="/polityka-prywatnosci" className="hover:text-blue-400 transition-colors">Polityka prywatności</Link>
+            <Link to="/rodo" className="hover:text-blue-400 transition-colors">RODO</Link>
+            <Link to="/zglos-nieprawidlowosc" className="hover:text-blue-400 transition-colors">Zgłoś nieprawidłowość</Link>
+          </div>
         </div>
       </div>
     </footer>

@@ -186,7 +186,7 @@ export function Home() {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Link
-                  to="/contact"
+                  to="/kontakt"
                   className="group px-8 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:-translate-y-0.5 inline-flex items-center justify-center gap-3"
                 >
                   Rozpocznij projekt
@@ -309,7 +309,7 @@ export function Home() {
               transition={{ duration: 0.6 }}
             >
               <Link
-                to="/services"
+                to="/nasza-oferta"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-semibold transition-colors"
               >
                 Zobacz wszystkie projekty
@@ -425,7 +425,7 @@ export function Home() {
                 className="mt-10"
               >
                 <Link
-                  to="/about"
+                  to="/o-nas"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/30"
                 >
                   Poznaj naszą historię
@@ -503,14 +503,14 @@ export function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/contact"
+                to="/kontakt"
                 className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 inline-flex items-center justify-center gap-3"
               >
                 Bezpłatna konsultacja
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                to="/services"
+                to="/nasza-oferta"
                 className="px-10 py-5 bg-white hover:bg-gray-100 text-gray-900 rounded-xl font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
               >
                 Odkryj usługi

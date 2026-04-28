@@ -54,6 +54,13 @@ export type CzlonekZarzadu = {
   zdjecie: string | null;
 };
 
+export type Strona = {
+  id: number;
+  tytul: string;
+  slug: string;
+  tresc: string;
+};
+
 export type Aktualnosc = {
   id: number;
   tytul: string;
@@ -98,6 +105,24 @@ export const api = {
         sort: '-data_publikacji',
         ...params,
       }),
+  },
+  strony: {
+    getBySlug: async (slug: string): Promise<Strona | null> => {
+      const items = await fetchItems<Strona>('strony', { 'filter[slug][_eq]': slug });
+      return items[0] ?? null;
+    },
+  },
+  aktualnosci: {
+    list: (params?: Record<string, string>) =>
+      fetchItems<Aktualnosc>('aktualnosci', {
+        'filter[opublikowany][_eq]': 'true',
+        sort: '-data_publikacji',
+        ...params,
+      }),
+    getBySlug: async (slug: string): Promise<Aktualnosc | null> => {
+      const items = await fetchItems<Aktualnosc>('aktualnosci', { 'filter[slug][_eq]': slug });
+      return items[0] ?? null;
+    },
   },
   kontakt: {
     submit: (data: ZgloszenieKontaktowe) => createItem('zgloszenia_kontaktowe', data),

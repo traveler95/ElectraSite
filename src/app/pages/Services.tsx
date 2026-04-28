@@ -185,7 +185,7 @@ export function Services() {
                     </div>
 
                     <Link
-                      to="/contact"
+                      to="/kontakt"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                     >
                       Zapytaj o wycenę
@@ -312,7 +312,7 @@ export function Services() {
               zaprojektować dedykowane rozwiązanie elektryczne dla Twojej firmy.
             </p>
             <Link
-              to="/contact"
+              to="/kontakt"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg"
             >
               Skontaktuj się
