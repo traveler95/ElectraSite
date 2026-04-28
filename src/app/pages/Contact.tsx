@@ -50,23 +50,23 @@ export function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Visit Us",
-      content: ["ul. Przemysłowa 12", "00-450 Warsaw, Poland"],
+      title: "Odwiedź nas",
+      content: ["Aleje Jerozolimskie 134", "05-500 Warszawa"],
     },
     {
       icon: Phone,
-      title: "Call Us",
+      title: "Zadzwoń do nas",
       content: ["+48 123 456 789", "+48 987 654 321"],
     },
     {
       icon: Mail,
-      title: "Email Us",
+      title: "Napisz do nas",
       content: ["info@electra.co.pl", "support@electra.co.pl"],
     },
     {
       icon: Clock,
-      title: "Working Hours",
-      content: ["Monday - Friday: 8:00 - 18:00", "Saturday: 9:00 - 14:00"],
+      title: "Godziny pracy",
+      content: ["Poniedziałek – Piątek: 8:00 – 18:00", "Sobota: 9:00 – 14:00"],
     },
   ];
 
@@ -81,10 +81,10 @@ export function Contact() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Kontakt</h1>
             <p className="text-xl text-blue-100">
-              Get in touch with our team. We're here to answer your questions and discuss your
-              electrical project needs.
+              Skontaktuj się z naszym zespołem. Jesteśmy tu, aby odpowiedzieć na Twoje pytania
+              i omówić potrzeby Twojego projektu elektrycznego.
             </p>
           </motion.div>
         </div>
@@ -132,9 +132,9 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Napisz do nas</h2>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll get back to you within 24 hours.
+                Wypełnij formularz poniżej, a odezwiemy się do Ciebie w ciągu 24 godzin.
               </p>
 
               {submitted ? (
@@ -143,10 +143,10 @@ export function Contact() {
                     <CheckCircle className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="text-xl font-semibold text-green-900 mb-2">
-                    Message Sent Successfully!
+                    Wiadomość wysłana!
                   </h3>
                   <p className="text-green-700">
-                    Thank you for contacting us. We'll respond to your inquiry shortly.
+                    Dziękujemy za kontakt. Odpiszemy na Twoje zapytanie wkrótce.
                   </p>
                 </div>
               ) : (
@@ -154,7 +154,7 @@ export function Contact() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Full Name *
+                        Imię i nazwisko *
                       </label>
                       <input
                         type="text"
@@ -170,7 +170,7 @@ export function Contact() {
 
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                        Adres e-mail *
                       </label>
                       <input
                         type="email"
@@ -188,7 +188,7 @@ export function Contact() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
+                        Numer telefonu
                       </label>
                       <input
                         type="tel"
@@ -203,7 +203,7 @@ export function Contact() {
 
                     <div>
                       <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                        Company Name
+                        Nazwa firmy
                       </label>
                       <input
                         type="text"
@@ -219,7 +219,7 @@ export function Contact() {
 
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
+                      Temat *
                     </label>
                     <select
                       id="subject"
@@ -229,21 +229,21 @@ export function Contact() {
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="quote">Request a Quote</option>
-                      <option value="installation">Installation Services</option>
-                      <option value="automation">Industrial Automation</option>
-                      <option value="energy">Energy Solutions</option>
-                      <option value="maintenance">Maintenance & Support</option>
-                      <option value="products">Product Information</option>
-                      <option value="other">Other</option>
+                      <option value="">Wybierz temat</option>
+                      <option value="general">Zapytanie ogólne</option>
+                      <option value="quote">Prośba o wycenę</option>
+                      <option value="installation">Usługi instalacyjne</option>
+                      <option value="automation">Automatyzacja przemysłowa</option>
+                      <option value="energy">Rozwiązania energetyczne</option>
+                      <option value="maintenance">Serwis i wsparcie</option>
+                      <option value="products">Informacje o usługach</option>
+                      <option value="other">Inne</option>
                     </select>
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      Wiadomość *
                     </label>
                     <textarea
                       id="message"
@@ -253,7 +253,7 @@ export function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Tell us about your project or inquiry..."
+                      placeholder="Opisz swój projekt lub zapytanie..."
                     />
                   </div>
 
@@ -290,7 +290,7 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Find Us</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Znajdź nas</h2>
 
               {/* Map Placeholder */}
               <div className="aspect-[4/3] bg-gray-200 rounded-xl mb-8 overflow-hidden">
@@ -309,28 +309,28 @@ export function Contact() {
               {/* Additional Information */}
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  Why Choose Electra?
+                  Dlaczego Electra?
                 </h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>Over 25 years of industry experience</span>
+                    <span>Ponad 25 lat doświadczenia w branży</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>Certified professionals and quality standards</span>
+                    <span>Certyfikowani specjaliści i najwyższe standardy jakości</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>24/7 emergency support available</span>
+                    <span>Pogotowie techniczne dostępne 24/7</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>Competitive pricing and flexible terms</span>
+                    <span>Konkurencyjne ceny i elastyczne warunki współpracy</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span>Comprehensive project management</span>
+                    <span>Kompleksowe zarządzanie projektami</span>
                   </li>
                 </ul>
               </div>
@@ -348,16 +348,16 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Emergency Support</h2>
+            <h2 className="text-3xl font-bold mb-4">Pogotowie techniczne</h2>
             <p className="text-xl text-blue-100 mb-6">
-              Need immediate assistance? Our emergency team is available 24/7.
+              Potrzebujesz natychmiastowej pomocy? Nasz zespół jest dostępny 24/7.
             </p>
             <a
               href="tel:+48123456789"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg"
             >
               <Phone className="w-5 h-5" />
-              Call Emergency Hotline
+              Zadzwoń na infolinię alarmową
             </a>
           </motion.div>
         </div>

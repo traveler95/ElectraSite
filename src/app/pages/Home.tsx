@@ -64,10 +64,10 @@ export function Home() {
   }, [hasAnimated]);
 
   const stats = [
-    { number: 2500, suffix: "+", label: "Completed Projects", icon: Briefcase },
-    { number: 850, suffix: "+", label: "Active Clients", icon: Users },
-    { number: 25, suffix: " Years", label: "Industry Experience", icon: Award },
-    { number: 99, suffix: "%", label: "Success Rate", icon: TrendingUp },
+    { number: 2500, suffix: "+", label: "Zrealizowanych projektów", icon: Briefcase },
+    { number: 850, suffix: "+", label: "Aktywnych klientów", icon: Users },
+    { number: 25, suffix: " lat", label: "Doświadczenia", icon: Award },
+    { number: 99, suffix: "%", label: "Wskaźnik sukcesu", icon: TrendingUp },
   ];
 
   const projects = [
@@ -151,7 +151,7 @@ export function Home() {
               >
                 <Sparkles className="w-4 h-4 text-blue-400" />
                 <span className="text-sm font-medium text-blue-100">
-                  Leading Electrical Solutions Since 1999
+                  Lider rozwiązań elektrycznych od 1999 roku
                 </span>
               </motion.div>
 
@@ -162,9 +162,9 @@ export function Home() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-6 leading-[1.1]"
               >
-                Power Your
+                Zasilamy
                 <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text">
-                  Industrial Future
+                  Twoją Przyszłość
                 </span>
               </motion.h1>
 
@@ -174,8 +174,8 @@ export function Home() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-xl sm:text-2xl text-gray-300 mb-10 max-w-2xl leading-relaxed"
               >
-                Complete electrical, mechanical, and automation solutions for Poland's largest
-                industrial and commercial projects.
+                Kompleksowe rozwiązania elektryczne, mechaniczne i automatyzacyjne dla największych
+                projektów przemysłowych i komercyjnych w Polsce.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -189,12 +189,12 @@ export function Home() {
                   to="/contact"
                   className="group px-8 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:-translate-y-0.5 inline-flex items-center justify-center gap-3"
                 >
-                  Start Your Project
+                  Rozpocznij projekt
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button className="group px-8 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/30 text-white rounded-xl font-bold text-lg transition-all inline-flex items-center justify-center gap-3">
                   <Play className="w-5 h-5" />
-                  Watch Our Work
+                  Zobacz nasze realizacje
                 </button>
               </motion.div>
 
@@ -207,15 +207,15 @@ export function Home() {
               >
                 <div>
                   <div className="text-3xl font-bold text-white mb-1">2500+</div>
-                  <div className="text-sm text-gray-400">Projects</div>
+                  <div className="text-sm text-gray-400">Projektów</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-white mb-1">850+</div>
-                  <div className="text-sm text-gray-400">Clients</div>
+                  <div className="text-sm text-gray-400">Klientów</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-white mb-1">25Y</div>
-                  <div className="text-sm text-gray-400">Experience</div>
+                  <div className="text-3xl font-bold text-white mb-1">25 lat</div>
+                  <div className="text-sm text-gray-400">Doświadczenia</div>
                 </div>
               </motion.div>
             </div>
@@ -296,10 +296,10 @@ export function Home() {
                 <span className="text-sm font-semibold text-blue-700">Portfolio</span>
               </div>
               <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
-                Featured Projects
+                Wyróżnione projekty
               </h2>
               <p className="text-xl text-gray-600">
-                Transforming industries with cutting-edge electrical and mechanical solutions
+                Transformujemy branże dzięki nowoczesnym rozwiązaniom elektrycznym i mechanicznym
               </p>
             </motion.div>
             <motion.div
@@ -312,7 +312,7 @@ export function Home() {
                 to="/services"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-semibold transition-colors"
               >
-                View All Projects
+                Zobacz wszystkie projekty
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </motion.div>
@@ -342,7 +342,7 @@ export function Home() {
                     {project.title}
                   </h3>
                   <div className="flex items-center text-gray-600 font-medium group-hover:text-blue-600 group-hover:gap-2 transition-all">
-                    View Project
+                    Zobacz projekt
                     <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -364,35 +364,35 @@ export function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6">
-                Why Industry Leaders Choose Electra
+                Dlaczego liderzy branży wybierają Electrę
               </h2>
               <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-                We combine decades of expertise with cutting-edge technology to deliver
-                unparalleled electrical and mechanical solutions for Poland's most ambitious
-                projects.
+                Łączymy dziesięciolecia doświadczenia z najnowszą technologią, dostarczając
+                niezrównane rozwiązania elektryczne i mechaniczne dla najbardziej ambitnych
+                projektów w Polsce.
               </p>
 
               <div className="space-y-6">
                 {[
                   {
                     icon: CheckCircle2,
-                    title: "ISO 9001 Certified Excellence",
-                    description: "Quality management systems recognized worldwide",
+                    title: "Certyfikat ISO 9001",
+                    description: "Systemy zarządzania jakością uznawane na całym świecie",
                   },
                   {
                     icon: Users,
-                    title: "Expert Engineering Team",
-                    description: "150+ certified professionals at your service",
+                    title: "Zespół ekspertów",
+                    description: "Ponad 150 certyfikowanych specjalistów do Twoich usług",
                   },
                   {
                     icon: Shield,
-                    title: "Safety First Approach",
-                    description: "Zero-compromise safety standards on every project",
+                    title: "Bezpieczeństwo przede wszystkim",
+                    description: "Najwyższe standardy bezpieczeństwa na każdym projekcie",
                   },
                   {
                     icon: TrendingUp,
-                    title: "Future-Ready Solutions",
-                    description: "Latest technology and sustainable practices",
+                    title: "Rozwiązania na przyszłość",
+                    description: "Najnowsze technologie i zrównoważone praktyki",
                   },
                 ].map((item, index) => {
                   const Icon = item.icon;
@@ -428,7 +428,7 @@ export function Home() {
                   to="/about"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/30"
                 >
-                  Discover Our Story
+                  Poznaj naszą historię
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </motion.div>
@@ -495,35 +495,35 @@ export function Home() {
             className="text-center max-w-4xl mx-auto"
           >
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-              Ready to Electrify Your Next Project?
+              Gotowy na kolejny projekt z Electrą?
             </h2>
             <p className="text-xl sm:text-2xl text-gray-300 mb-10 leading-relaxed">
-              Join 850+ industry leaders who trust Electra for their most critical electrical and
-              mechanical installations.
+              Dołącz do ponad 850 liderów branży, którzy ufają Electrze w realizacji
+              najbardziej wymagających instalacji elektrycznych i mechanicznych.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
                 className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 inline-flex items-center justify-center gap-3"
               >
-                Get Free Consultation
+                Bezpłatna konsultacja
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/services"
                 className="px-10 py-5 bg-white hover:bg-gray-100 text-gray-900 rounded-xl font-bold text-lg transition-all inline-flex items-center justify-center gap-3"
               >
-                Explore Services
+                Odkryj usługi
               </Link>
             </div>
 
             {/* Trust Badges */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-white/20">
               {[
-                { label: "ISO 9001", sublabel: "Certified" },
-                { label: "24/7", sublabel: "Support" },
-                { label: "15-Year", sublabel: "Warranty" },
-                { label: "100%", sublabel: "Satisfaction" },
+                { label: "ISO 9001", sublabel: "Certyfikat" },
+                { label: "24/7", sublabel: "Wsparcie" },
+                { label: "15 lat", sublabel: "Gwarancja" },
+                { label: "100%", sublabel: "Satysfakcja" },
               ].map((badge, index) => (
                 <motion.div
                   key={badge.label}

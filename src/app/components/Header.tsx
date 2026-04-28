@@ -25,12 +25,12 @@ export function Header() {
   ];
 
   const navLinks = [
-    { path: "/", label: "Home", isIcon: true },
-    { path: "/about", label: "About" },
-    { path: "/services", label: "Services" },
-    { path: "/products", label: "Products" },
-    { path: "/group", label: "Group" },
-    { path: "/contact", label: "Contact" },
+    { path: "/", label: "Strona główna", isIcon: true },
+    { path: "/about", label: "O nas" },
+    { path: "/services", label: "Oferta" },
+    { path: "/products", label: "Projekty" },
+    { path: "/group", label: "Grupa" },
+    { path: "/contact", label: "Kontakt" },
   ];
 
   const isActive = (path: string) => {
@@ -441,7 +441,7 @@ export function Header() {
                                 <Home className={`w-5 h-5 ${active ? "text-white" : "text-gray-700"}`} />
                               )}
                               <span className={`font-semibold ${active ? "text-white" : "text-gray-700"}`}>
-                                {link.isIcon ? "Home" : link.label}
+                                {link.isIcon ? "Strona główna" : link.label}
                               </span>
                             </div>
                           </motion.div>
@@ -454,7 +454,7 @@ export function Header() {
                 {/* Language Selector Mobile */}
                 <div className="px-6 pb-6 border-t border-white/20 pt-6">
                   <div className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-semibold">
-                    Language
+                    Język
                   </div>
                   <div className="grid grid-cols-3 gap-2">
                     {languages.map((lang, index) => (

@@ -23,55 +23,55 @@ export function About() {
   const values = [
     {
       icon: Shield,
-      title: "Quality & Safety",
+      title: "Jakość i bezpieczeństwo",
       description:
-        "We prioritize the highest quality standards and safety protocols in every project we undertake.",
+        "Priorytetem jest dla nas najwyższa jakość i przestrzeganie zasad bezpieczeństwa w każdym projekcie.",
     },
     {
       icon: Lightbulb,
-      title: "Innovation",
+      title: "Innowacyjność",
       description:
-        "Embracing cutting-edge technology and innovative solutions to deliver exceptional results.",
+        "Wdrażamy najnowsze technologie i innowacyjne rozwiązania, aby dostarczać wyjątkowe rezultaty.",
     },
     {
       icon: Heart,
-      title: "Customer Focus",
+      title: "Orientacja na klienta",
       description:
-        "Building long-term relationships through dedication, transparency, and excellent service.",
+        "Budujemy długotrwałe relacje poprzez zaangażowanie, transparentność i doskonałą obsługę.",
     },
     {
       icon: TrendingUp,
-      title: "Continuous Growth",
+      title: "Ciągły rozwój",
       description:
-        "Investing in our team's development and staying ahead of industry trends and standards.",
+        "Inwestujemy w rozwój naszego zespołu i nadążamy za trendami oraz standardami branżowymi.",
     },
   ];
 
   const timeline = [
     {
       year: "1999",
-      title: "Company Founded",
-      description: "Electra was established with a vision to provide top-quality electrical services.",
+      title: "Założenie firmy",
+      description: "Electra M&E Polska została założona z misją świadczenia usług elektrycznych najwyższej jakości.",
     },
     {
       year: "2005",
-      title: "ISO Certification",
-      description: "Achieved ISO 9001 certification, demonstrating our commitment to quality.",
+      title: "Certyfikat ISO",
+      description: "Uzyskanie certyfikatu ISO 9001 potwierdzającego nasze zaangażowanie w jakość.",
     },
     {
       year: "2012",
-      title: "Expansion",
-      description: "Expanded operations nationwide, serving major industrial clients across Poland.",
+      title: "Ekspansja",
+      description: "Rozszerzyliśmy działalność na cały kraj, obsługując czołowych klientów przemysłowych w Polsce.",
     },
     {
       year: "2018",
-      title: "Green Energy Division",
-      description: "Launched renewable energy solutions division to support sustainable development.",
+      title: "Dział energii odnawialnej",
+      description: "Uruchomienie działu rozwiązań energii odnawialnej wspierającego zrównoważony rozwój.",
     },
     {
       year: "2024",
-      title: "Smart Automation",
-      description: "Introduced advanced automation and IoT solutions for modern industries.",
+      title: "Inteligentna automatyzacja",
+      description: "Wdrożenie zaawansowanych rozwiązań automatyzacji i IoT dla nowoczesnych branż.",
     },
   ];
 
@@ -87,10 +87,10 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">About Electra</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">O Electrze</h1>
             <p className="text-xl text-blue-100">
-              With over 25 years of excellence in electrical engineering, we are your trusted
-              partner for comprehensive electrical solutions across Poland.
+              Z ponad 25-letnim doświadczeniem w elektrotechnice jesteśmy zaufanym partnerem
+              w realizacji kompleksowych rozwiązań elektrycznych w Polsce.
             </p>
           </motion.div>
         </div>
@@ -110,12 +110,12 @@ export function About() {
               <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <Target className="w-7 h-7 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Nasza misja</h2>
               <p className="text-gray-700 leading-relaxed">
-                To deliver exceptional electrical solutions that exceed client expectations through
-                innovation, quality craftsmanship, and unwavering commitment to safety. We strive
-                to be the most trusted partner for businesses seeking reliable electrical services
-                and sustainable energy solutions.
+                Dostarczanie wyjątkowych rozwiązań elektrycznych przekraczających oczekiwania klientów
+                poprzez innowacyjność, najwyższą jakość wykonania i niezachwiane zaangażowanie
+                w bezpieczeństwo. Dążymy do bycia najbardziej zaufanym partnerem dla firm
+                poszukujących niezawodnych usług elektrycznych i zrównoważonych rozwiązań energetycznych.
               </p>
             </motion.div>
 
@@ -129,12 +129,12 @@ export function About() {
               <div className="w-14 h-14 bg-gray-700 rounded-xl flex items-center justify-center mb-6">
                 <Eye className="w-7 h-7 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Nasza wizja</h2>
               <p className="text-gray-700 leading-relaxed">
-                To be Poland's leading provider of innovative electrical and energy solutions,
-                recognized for our technical excellence, sustainable practices, and positive impact
-                on the communities we serve. We envision a future where every business has access
-                to cutting-edge, eco-friendly electrical systems.
+                Bycie wiodącym dostawcą innowacyjnych rozwiązań elektrycznych i energetycznych
+                w Polsce, uznanym za doskonałość techniczną, zrównoważone praktyki i pozytywny
+                wpływ na społeczności, którym służymy. Wyobrażamy sobie przyszłość, w której każda
+                firma ma dostęp do nowoczesnych, ekologicznych systemów elektrycznych.
               </p>
             </motion.div>
           </div>
@@ -152,26 +152,24 @@ export function About() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                Our Story
+                Nasza historia
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  Founded in 1999, Electra began as a small team of passionate electrical engineers
-                  with a vision to transform the industry through quality service and innovation.
-                  What started in a modest workshop in Warsaw has grown into one of Poland's most
-                  respected electrical solution providers.
+                  Założona w 1999 roku, Electra M&E Polska rozpoczęła działalność jako niewielki
+                  zespół pasjonatów elektrotechniki z wizją transformacji branży poprzez jakość
+                  i innowacje. To, co zaczęło się w skromnym biurze w Warszawie, wyrosło na jednego
+                  z najbardziej szanowanych dostawców rozwiązań elektrycznych w Polsce.
                 </p>
                 <p>
-                  Over the past 25 years, we've completed over 500 projects, from small commercial
-                  installations to large-scale industrial automation systems. Our commitment to
-                  excellence has earned us ISO 9001 certification and the trust of leading
-                  businesses across the country.
+                  Przez ostatnie 25 lat zrealizowaliśmy setki projektów — od małych instalacji
+                  komercyjnych po wielkoskalowe systemy automatyzacji przemysłowej. Nasze zaangażowanie
+                  w doskonałość zaowocowało certyfikatem ISO 9001 i zaufaniem czołowych firm w całym kraju.
                 </p>
                 <p>
-                  Today, our team of 50+ certified professionals continues to push boundaries,
-                  incorporating renewable energy solutions, smart automation, and sustainable
-                  practices into everything we do. We're not just building electrical systems –
-                  we're powering Poland's future.
+                  Dziś nasz zespół ponad 50 certyfikowanych specjalistów nadal przesuwa granice możliwości,
+                  wdrażając rozwiązania energii odnawialnej, inteligentną automatyzację i zrównoważone
+                  praktyki. Nie budujemy tylko instalacji elektrycznych — zasilamy przyszłość Polski.
                 </p>
               </div>
             </motion.div>
@@ -203,9 +201,9 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nasze wartości</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The principles that guide everything we do
+              Zasady, które kierują wszystkim, co robimy
             </p>
           </motion.div>
 
@@ -243,8 +241,8 @@ export function About() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">Key milestones in our 25-year history</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nasza droga</h2>
+            <p className="text-xl text-gray-600">Kluczowe kamienie milowe w naszej 25-letniej historii</p>
           </motion.div>
 
           <div className="space-y-8">
@@ -289,10 +287,10 @@ export function About() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Leadership Team
+              Zarząd
             </h2>
             <p className="text-xl text-gray-600">
-              Meet the experts driving our success
+              Poznaj ekspertów stojących za naszym sukcesem
             </p>
           </motion.div>
 
@@ -330,10 +328,10 @@ export function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
-              { icon: Users, number: "50+", label: "Team Members" },
-              { icon: Award, number: "500+", label: "Projects Completed" },
-              { icon: Shield, number: "25+", label: "Years of Experience" },
-              { icon: TrendingUp, number: "200+", label: "Happy Clients" },
+              { icon: Users, number: "50+", label: "Pracowników" },
+              { icon: Award, number: "500+", label: "Zrealizowanych projektów" },
+              { icon: Shield, number: "25+", label: "Lat doświadczenia" },
+              { icon: TrendingUp, number: "200+", label: "Zadowolonych klientów" },
             ].map((stat, index) => {
               const Icon = stat.icon;
               return (

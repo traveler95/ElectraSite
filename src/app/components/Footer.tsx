@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Zap, Phone, Mail, MapPin, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube, Instagram } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,11 +18,11 @@ export function Footer() {
               />
             </div>
             <p className="text-sm text-gray-400 mb-4">
-              Leading provider of electrical solutions, installations, and energy systems for commercial and industrial clients.
+              Wiodący dostawca rozwiązań elektrycznych, instalacji i systemów energetycznych dla klientów komercyjnych i przemysłowych.
             </p>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/ElectraGroup.OfficialPage/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
@@ -31,7 +31,7 @@ export function Footer() {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/14054/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
@@ -40,74 +40,53 @@ export function Footer() {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://www.youtube.com/channel/UC5e-PFzM7P4CFcS-nZmwsfQ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
-                aria-label="Twitter"
+                aria-label="YouTube"
               >
-                <Twitter className="w-4 h-4" />
+                <Youtube className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/electragroup_official/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold mb-4">Szybkie linki</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/" className="hover:text-blue-400 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-blue-400 transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" className="hover:text-blue-400 transition-colors">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-blue-400 transition-colors">
-                  Contact
-                </Link>
-              </li>
+              <li><Link to="/" className="hover:text-blue-400 transition-colors">Strona główna</Link></li>
+              <li><Link to="/about" className="hover:text-blue-400 transition-colors">O nas</Link></li>
+              <li><Link to="/services" className="hover:text-blue-400 transition-colors">Nasza oferta</Link></li>
+              <li><Link to="/products" className="hover:text-blue-400 transition-colors">Projekty</Link></li>
+              <li><Link to="/contact" className="hover:text-blue-400 transition-colors">Kontakt</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Services</h3>
+            <h3 className="text-white font-semibold mb-4">Usługi</h3>
             <ul className="space-y-2 text-sm">
-              <li className="hover:text-blue-400 transition-colors cursor-pointer">
-                Electrical Installations
-              </li>
-              <li className="hover:text-blue-400 transition-colors cursor-pointer">
-                Industrial Automation
-              </li>
-              <li className="hover:text-blue-400 transition-colors cursor-pointer">
-                Energy Solutions
-              </li>
-              <li className="hover:text-blue-400 transition-colors cursor-pointer">
-                Maintenance & Support
-              </li>
-              <li className="hover:text-blue-400 transition-colors cursor-pointer">
-                Project Management
-              </li>
+              <li className="hover:text-blue-400 transition-colors cursor-pointer">Instalacje elektryczne</li>
+              <li className="hover:text-blue-400 transition-colors cursor-pointer">Automatyzacja przemysłowa</li>
+              <li className="hover:text-blue-400 transition-colors cursor-pointer">Rozwiązania energetyczne</li>
+              <li className="hover:text-blue-400 transition-colors cursor-pointer">Serwis i wsparcie</li>
+              <li className="hover:text-blue-400 transition-colors cursor-pointer">Zarządzanie projektami</li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-white font-semibold mb-4">Kontakt</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-blue-400" />
@@ -130,7 +109,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center text-gray-500">
-          <p>&copy; {currentYear} Electra. All rights reserved.</p>
+          <p>&copy; {currentYear} Electra M&E Polska. Wszelkie prawa zastrzeżone.</p>
         </div>
       </div>
     </footer>

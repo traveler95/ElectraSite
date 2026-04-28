@@ -18,61 +18,61 @@ export function Services() {
   const mainServices = [
     {
       icon: Zap,
-      title: "Electrical Installations",
+      title: "Instalacje elektryczne",
       description:
-        "Complete electrical installation services for new construction and renovations. Our certified team handles everything from design to implementation.",
+        "Kompleksowe usługi instalacji elektrycznych dla nowych budynków i remontów. Nasz certyfikowany zespół zajmuje się wszystkim — od projektu po realizację.",
       features: [
-        "Low and high voltage installations",
-        "Power distribution systems",
-        "Lighting systems design and installation",
-        "Emergency power systems",
-        "Cable routing and management",
-        "Electrical panel installation",
+        "Instalacje niskiego i wysokiego napięcia",
+        "Systemy rozdziału energii",
+        "Projektowanie i montaż systemów oświetlenia",
+        "Awaryjne systemy zasilania",
+        "Prowadzenie i zarządzanie kablami",
+        "Montaż rozdzielnic elektrycznych",
       ],
       image: "https://images.unsplash.com/photo-1759830337357-29c472b6746c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwcGFuZWwlMjBpbnN0YWxsYXRpb258ZW58MXx8fHwxNzczNzAxMDU0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     },
     {
       icon: Factory,
-      title: "Industrial Automation",
+      title: "Automatyzacja przemysłowa",
       description:
-        "Advanced automation solutions to optimize your industrial processes, increase efficiency, and reduce operational costs.",
+        "Zaawansowane rozwiązania automatyzacji pozwalające zoptymalizować procesy przemysłowe, zwiększyć wydajność i obniżyć koszty operacyjne.",
       features: [
-        "PLC programming and integration",
-        "SCADA systems implementation",
-        "Process automation",
-        "Robotics integration",
-        "Industrial control systems",
-        "Machine automation",
+        "Programowanie i integracja sterowników PLC",
+        "Wdrożenie systemów SCADA",
+        "Automatyzacja procesów",
+        "Integracja robotyki",
+        "Przemysłowe systemy sterowania",
+        "Automatyzacja maszyn",
       ],
       image: "https://images.unsplash.com/photo-1764115424793-063c2a8b61f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwYXV0b21hdGlvbiUyMGZhY3Rvcnl8ZW58MXx8fHwxNzczNzM4OTM3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     },
     {
       icon: Lightbulb,
-      title: "Energy Solutions",
+      title: "Rozwiązania energetyczne",
       description:
-        "Sustainable energy systems and renewable solutions to reduce your environmental impact and operational costs.",
+        "Zrównoważone systemy energetyczne i odnawialne źródła energii pozwalające zmniejszyć wpływ na środowisko i koszty operacyjne.",
       features: [
-        "Solar panel installation",
-        "Energy efficiency audits",
-        "LED lighting upgrades",
-        "Power factor correction",
-        "Energy management systems",
-        "Renewable energy consulting",
+        "Montaż paneli fotowoltaicznych",
+        "Audyty efektywności energetycznej",
+        "Modernizacja oświetlenia LED",
+        "Korekcja współczynnika mocy",
+        "Systemy zarządzania energią",
+        "Doradztwo w zakresie energii odnawialnej",
       ],
       image: "https://images.unsplash.com/photo-1628206554160-63e8c921e398?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZW5ld2FibGUlMjBlbmVyZ3klMjBzb2xhciUyMHBhbmVsc3xlbnwxfHx8fDE3NzM2NzIyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     },
     {
       icon: Settings,
-      title: "Maintenance & Support",
+      title: "Serwis i wsparcie",
       description:
-        "Comprehensive maintenance programs and 24/7 support to keep your electrical systems running at peak performance.",
+        "Kompleksowe programy serwisowe i wsparcie 24/7 zapewniające optymalną pracę Twoich instalacji elektrycznych.",
       features: [
-        "Preventive maintenance programs",
-        "24/7 emergency response",
-        "System diagnostics and testing",
-        "Equipment upgrades",
-        "Thermal imaging inspections",
-        "Compliance inspections",
+        "Programy przeglądów prewencyjnych",
+        "Pogotowie techniczne 24/7",
+        "Diagnostyka i testy systemów",
+        "Modernizacja urządzeń",
+        "Inspekcje termowizyjne",
+        "Kontrole zgodności z przepisami",
       ],
       image: "https://images.unsplash.com/photo-1636218685495-8f6545aadb71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwdGVjaG5pY2lhbiUyMHdvcmt8ZW58MXx8fHwxNzczNjY2NTQ2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     },
@@ -81,51 +81,51 @@ export function Services() {
   const additionalServices = [
     {
       icon: Building2,
-      title: "Commercial Projects",
-      description: "Electrical solutions for offices, retail spaces, and commercial buildings.",
+      title: "Projekty komercyjne",
+      description: "Rozwiązania elektryczne dla biur, obiektów handlowych i budynków komercyjnych.",
     },
     {
       icon: Cable,
-      title: "Data & Communications",
-      description: "Structured cabling and network infrastructure installation.",
+      title: "Teletechnika i sieci",
+      description: "Montaż okablowania strukturalnego i infrastruktury sieciowej.",
     },
     {
       icon: Gauge,
-      title: "Testing & Certification",
-      description: "Comprehensive electrical testing and safety certification services.",
+      title: "Pomiary i certyfikacja",
+      description: "Kompleksowe pomiary elektryczne i certyfikacja bezpieczeństwa instalacji.",
     },
     {
       icon: Wrench,
-      title: "Equipment Installation",
-      description: "Professional installation of industrial electrical equipment.",
+      title: "Montaż urządzeń",
+      description: "Profesjonalny montaż przemysłowych urządzeń elektrycznych.",
     },
   ];
 
   const process = [
     {
       step: "01",
-      title: "Consultation",
-      description: "We start by understanding your needs and project requirements.",
+      title: "Konsultacja",
+      description: "Zaczynamy od poznania Twoich potrzeb i wymagań projektowych.",
     },
     {
       step: "02",
-      title: "Design & Planning",
-      description: "Our engineers create detailed plans and specifications.",
+      title: "Projekt i planowanie",
+      description: "Nasi inżynierowie tworzą szczegółowe plany i specyfikacje techniczne.",
     },
     {
       step: "03",
-      title: "Implementation",
-      description: "Our certified technicians execute the project with precision.",
+      title: "Realizacja",
+      description: "Nasi certyfikowani technicy wykonują projekt z najwyższą precyzją.",
     },
     {
       step: "04",
-      title: "Testing & Handover",
-      description: "Thorough testing and documentation before project completion.",
+      title: "Odbiór i testy",
+      description: "Dokładne testy i dokumentacja przed zakończeniem projektu.",
     },
     {
       step: "05",
-      title: "Support",
-      description: "Ongoing maintenance and support for long-term success.",
+      title: "Wsparcie",
+      description: "Bieżący serwis i wsparcie techniczne dla długoterminowego sukcesu.",
     },
   ];
 
@@ -140,10 +140,10 @@ export function Services() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Our Services</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">Nasza oferta</h1>
             <p className="text-xl text-blue-100">
-              Comprehensive electrical solutions tailored to your business needs, delivered by
-              certified professionals with decades of experience.
+              Kompleksowe rozwiązania elektryczne dopasowane do potrzeb Twojej firmy,
+              realizowane przez certyfikowanych specjalistów z wieloletnim doświadczeniem.
             </p>
           </motion.div>
         </div>
@@ -188,7 +188,7 @@ export function Services() {
                       to="/contact"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                     >
-                      Request Quote
+                      Zapytaj o wycenę
                       <ArrowRight className="w-5 h-5" />
                     </Link>
                   </div>
@@ -220,10 +220,10 @@ export function Services() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Additional Services
+              Dodatkowe usługi
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We offer a comprehensive range of specialized electrical services
+              Oferujemy szeroki zakres specjalistycznych usług elektrycznych
             </p>
           </motion.div>
 
@@ -262,10 +262,10 @@ export function Services() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Our Process
+              Nasz proces
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              A structured approach ensuring quality and efficiency at every step
+              Ustrukturyzowane podejście zapewniające jakość i efektywność na każdym etapie
             </p>
           </motion.div>
 
@@ -305,17 +305,17 @@ export function Services() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Need a Custom Solution?
+              Potrzebujesz rozwiązania szytego na miarę?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Contact us to discuss your specific requirements. Our team is ready to design a
-              tailored electrical solution for your business.
+              Skontaktuj się z nami, aby omówić swoje wymagania. Nasz zespół jest gotowy
+              zaprojektować dedykowane rozwiązanie elektryczne dla Twojej firmy.
             </p>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg"
             >
-              Get in Touch
+              Skontaktuj się
               <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
