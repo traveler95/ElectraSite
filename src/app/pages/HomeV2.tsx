@@ -5,10 +5,9 @@ import { ArrowRight, ArrowDown, Phone, Mail, MapPin } from "lucide-react";
 import { api, fileUrl, type Projekt, type Aktualnosc } from "../../lib/directus";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
-const BLUE   = "#009bee";
-const NAVY   = "#004a69";
-const YELLOW = "#ffcc33";
-const LIGHT  = "#f2f6f9";
+const BLUE  = "#009bee";
+const NAVY  = "#004a69";
+const LIGHT = "#f2f6f9";
 
 const electraFilter = "grayscale(72%) sepia(44%) brightness(78%) hue-rotate(160deg) saturate(220%) contrast(112%)";
 
@@ -85,7 +84,7 @@ export function HomeV2() {
         </motion.div>
 
         <div className="absolute left-0 top-0 bottom-0 w-[3px]" style={{ background: BLUE }} />
-        <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: YELLOW }} />
+        <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: BLUE }} />
 
         <motion.div style={{ opacity: heroOpacity }} className="relative z-10 h-full flex flex-col justify-center px-[8%] lg:px-[12%] pt-24">
           <motion.p initial={{ opacity:0, x:-16 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.5 }} className="text-xs font-bold tracking-[0.35em] uppercase mb-5" style={{ color: BLUE }}>
@@ -167,7 +166,7 @@ export function HomeV2() {
         <div className="px-[8%] lg:px-[12%]">
           <div className="flex items-end justify-between mb-14">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: YELLOW }}>Co robimy</p>
+              <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>Co robimy</p>
               <h2 className="text-white font-black leading-tight" style={{ fontSize: "clamp(2rem,3.5vw,3rem)" }}>Nasza oferta</h2>
             </div>
             <Link to="/nasza-oferta" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white transition-colors">
@@ -180,11 +179,11 @@ export function HomeV2() {
               <motion.div key={s.title} initial={{ opacity:0 }} whileInView={{ opacity:1 }} viewport={{ once:true }} transition={{ duration:0.4, delay:i*0.08 }}
                 className="group bg-[#004a69] hover:bg-[#005580] transition-colors duration-300 p-10 cursor-pointer relative"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[3px] transition-all duration-300" style={{ background: YELLOW }} />
+                <div className="absolute left-0 top-0 bottom-0 w-0 group-hover:w-[3px] transition-all duration-300" style={{ background: "rgba(255,255,255,0.25)" }} />
                 <div className="text-white/15 font-black text-4xl mb-6 leading-none select-none">{s.num}</div>
                 <h3 className="text-white font-bold mb-3" style={{ fontSize:"1.05rem" }}>{s.title}</h3>
                 <p className="text-white/55 text-sm leading-relaxed group-hover:text-white/75 transition-colors">{s.desc}</p>
-                <div className="mt-5 flex items-center gap-2 text-xs font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-all" style={{ color: YELLOW }}>
+                <div className="mt-5 flex items-center gap-2 text-xs font-bold tracking-widest opacity-0 group-hover:opacity-100 transition-all" style={{ color: "rgba(255,255,255,0.7)" }}>
                   WIĘCEJ <ArrowRight className="w-3 h-3" />
                 </div>
               </motion.div>
@@ -225,7 +224,7 @@ export function HomeV2() {
                   />
                   <div className="absolute inset-0 flex items-end p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300" style={{ background: "linear-gradient(0deg, rgba(0,74,105,0.92) 0%, transparent 100%)" }}>
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest mb-1" style={{ color: YELLOW }}>
+                      <p className="text-[10px] uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.7)" }}>
                         {typeof p.kategoria === "object" ? (p.kategoria as any).nazwa : ""}
                       </p>
                       <h3 className="text-white font-bold text-sm">{p.tytul}</h3>
@@ -282,31 +281,58 @@ export function HomeV2() {
         </section>
       )}
 
-      {/* ══ GOTOWI DO WSPÓŁPRACY — clip-path opposite angle ══
-           clipAngleUp creates opposite diagonal direction,
-           giving a visual "bookend" effect with the services section. */}
-      <section
-        style={{
-          background: BLUE,
-          clipPath: clipAngleUp,
-          margin: "-3rem 0 0",
-          padding: "7rem 0",
-        }}
-      >
-        <div className="px-[8%] lg:px-[12%] grid md:grid-cols-2 gap-16 items-center">
+      {/* ══ GOTOWI DO WSPÓŁPRACY — double box-angle ════════
+           Two counter-rotated divs at opacity 0.8 each.
+           Where they overlap (center) opacity stacks to ~0.96,
+           making the center darker — exactly like the original
+           electra.co.pl .box-angle effect.
+           overflow:hidden clips the extended panels cleanly.  */}
+      <section className="relative overflow-hidden" style={{ padding: "7rem 0", marginTop: "2rem" }}>
+        {/* Panel 1 — rotated +6deg */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: 0, bottom: 0,
+            left: "-60%", right: "-60%",
+            background: NAVY,
+            opacity: 0.85,
+            transform: "rotate(6deg)",
+            transformOrigin: "center",
+          }}
+        />
+        {/* Panel 2 — rotated −6deg, same color + opacity
+            Where both panels overlap the effective opacity is
+            1 − (1−0.85)² ≈ 0.978 → visibly darker center band */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: 0, bottom: 0,
+            left: "-60%", right: "-60%",
+            background: NAVY,
+            opacity: 0.85,
+            transform: "rotate(-6deg)",
+            transformOrigin: "center",
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 px-[8%] lg:px-[12%] grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <div className="w-10 h-[3px] mb-8" style={{ background: YELLOW }} />
-            <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-4 text-white/70">Gotowi do współpracy</p>
-            <h2 className="text-white font-black leading-tight mb-6" style={{ fontSize:"clamp(2rem,3.5vw,3rem)" }}>
+            <div className="w-10 h-[3px] mb-8" style={{ background: BLUE }} />
+            <p className="text-xs uppercase tracking-[0.3em] font-semibold mb-4" style={{ color: BLUE }}>
+              Gotowi do współpracy
+            </p>
+            <h2 className="text-white font-black leading-tight mb-6" style={{ fontSize: "clamp(2rem,3.5vw,3rem)" }}>
               Zrealizujmy razem<br />Twój projekt.
             </h2>
-            <p className="text-white/70 text-sm leading-relaxed mb-10 max-w-sm">
+            <p className="text-white/65 text-sm leading-relaxed mb-10 max-w-sm">
               Skontaktuj się z nami — nasz zespół odpowie na każde pytanie i przygotuje dedykowaną ofertę dla Twojej inwestycji.
             </p>
             <Link
               to="/kontakt"
-              className="inline-flex items-center gap-3 px-8 py-4 font-bold text-blue-700 text-sm tracking-widest hover:opacity-90 transition-opacity"
-              style={{ background: YELLOW }}
+              className="inline-flex items-center gap-3 px-8 py-4 font-bold text-white text-sm tracking-widest border border-white/30 hover:bg-white/10 transition-colors"
             >
               NAPISZ DO NAS <ArrowRight className="w-4 h-4" />
             </Link>
@@ -319,12 +345,15 @@ export function HomeV2() {
               { icon: Mail,   label: "E-mail",  value: "info@electra.co.pl" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-5">
-                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center" style={{ background:"rgba(255,255,255,0.15)" }}>
-                  <Icon className="w-5 h-5 text-white" />
+                <div
+                  className="w-12 h-12 flex-shrink-0 flex items-center justify-center"
+                  style={{ background: "rgba(0,155,238,0.15)", border: "1px solid rgba(0,155,238,0.25)" }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: BLUE }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest mb-1 text-white/40">{label}</div>
-                  <div className="text-white text-sm whitespace-pre-line leading-relaxed">{value}</div>
+                  <div className="text-[10px] uppercase tracking-widest mb-1 text-white/35">{label}</div>
+                  <div className="text-white/80 text-sm whitespace-pre-line leading-relaxed">{value}</div>
                 </div>
               </div>
             ))}
