@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { Home, Menu, X, ChevronDown, ExternalLink } from "lucide-react";
+import { Home, Globe, Menu, X, ChevronDown, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 
 type NavItem = {
@@ -58,14 +58,25 @@ const navLinks: NavItem[] = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
+  const [currentLanguage, setCurrentLanguage] = useState("PL");
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const location = useLocation();
 
   const { scrollY } = useScroll();
-  const backgroundOpacity = useTransform(scrollY, [0, 100], [0.85, 0.98]);
+  const borderOpacity = useTransform(scrollY, [0, 100], [0.2, 0.4]);
+  const glowOpacity = useTransform(scrollY, [0, 100], [0.15, 0.3]);
+  const topPosition = useTransform(scrollY, [0, 50], [24, 0]);
+  const menuWidth = useTransform(scrollY, [0, 50], ["95%", "100%"]);
   const borderRadius = useTransform(scrollY, [0, 50], [16, 0]);
-  const topPosition = useTransform(scrollY, [0, 50], [12, 0]);
+
+  const languages = [
+    { code: "PL", name: "Polski" },
+    { code: "EN", name: "English" },
+    { code: "DE", name: "Deutsch" },
+  ];
 
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
@@ -74,128 +85,268 @@ export function Header() {
 
   const isParentActive = (item: NavItem) => {
     if (isActive(item.path)) return true;
-    return item.children?.some(c => isActive(c.path)) ?? false;
+    return item.children?.some(c => !c.external && isActive(c.path)) ?? false;
   };
 
   return (
     <>
+      {/* Floating Glass Navigation */}
       <motion.header
-        className="fixed left-0 right-0 z-50"
-        style={{ top: topPosition }}
+        className="fixed left-1/2 -translate-x-1/2 z-50 max-w-none"
+        style={{ top: topPosition, width: menuWidth }}
       >
-        <motion.div
-          className="mx-auto backdrop-blur-xl bg-black/80 shadow-2xl border-b border-white/10"
-          style={{ borderRadius }}
-        >
-          <nav className="px-4 sm:px-6 py-3">
-            <div className="flex items-center justify-between gap-4">
-              {/* Logo */}
-              <Link to="/" className="flex-shrink-0">
-                <img
-                  src="https://www.electra.co.il/filestock/file/1502610340683-0.png"
-                  alt="Electra"
-                  className="h-9 w-auto brightness-0 invert"
-                />
-              </Link>
+        <div className="relative">
+          {/* Glow Effect */}
+          <motion.div
+            style={{ opacity: glowOpacity, borderRadius }}
+            className="absolute -inset-[1px] bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-blue-500/20 blur-sm transition-opacity duration-500"
+          />
 
-              {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center gap-0.5 flex-wrap">
-                {navLinks.map((link) => {
-                  const active = isParentActive(link);
-                  const hasChildren = !!link.children;
-                  const isOpen = openDropdown === link.path;
-
-                  return (
-                    <div
-                      key={link.path}
-                      className="relative"
-                      onMouseEnter={() => hasChildren && setOpenDropdown(link.path)}
-                      onMouseLeave={() => setOpenDropdown(null)}
-                    >
-                      {link.isIcon ? (
-                        <Link
-                          to={link.path}
-                          className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                            active ? "bg-white/20 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"
-                          }`}
-                        >
-                          <Home className="w-4 h-4" />
-                        </Link>
-                      ) : (
-                        <Link
-                          to={link.path}
-                          className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
-                            active ? "bg-white/20 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"
-                          }`}
-                        >
-                          {link.label}
-                          {hasChildren && (
-                            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`} />
-                          )}
-                        </Link>
-                      )}
-
-                      {/* Dropdown */}
-                      <AnimatePresence>
-                        {hasChildren && isOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 mt-1 w-64 z-50"
-                          >
-                            <div className="bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden py-1">
-                              {link.children!.map((child) => (
-                                child.external ? (
-                                  <a
-                                    key={child.path}
-                                    href={child.path}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
-                                    onClick={() => setOpenDropdown(null)}
-                                  >
-                                    {child.label}
-                                    <ExternalLink className="w-3 h-3 ml-auto opacity-50" />
-                                  </a>
-                                ) : (
-                                  <Link
-                                    key={child.path}
-                                    to={child.path}
-                                    className={`block px-4 py-2.5 text-sm transition-colors ${
-                                      isActive(child.path)
-                                        ? "text-white bg-blue-600"
-                                        : "text-gray-300 hover:text-white hover:bg-white/10"
-                                    }`}
-                                    onClick={() => setOpenDropdown(null)}
-                                  >
-                                    {child.label}
-                                  </Link>
-                                )
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+          {/* Main Glass Panel */}
+          <motion.div
+            className="relative backdrop-blur-xl bg-black/[0.26] shadow-2xl shadow-black/10 transition-all duration-500"
+            style={{
+              borderColor: `rgba(255, 255, 255, ${borderOpacity})`,
+              borderWidth: "1px",
+              borderStyle: "solid",
+              borderRadius,
+            }}
+          >
+            {/* Animated gradient border effect */}
+            <div className="absolute inset-0 overflow-hidden" style={{ borderRadius }}>
+              <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                animate={{
+                  background: [
+                    "linear-gradient(0deg, rgba(59,130,246,0.1) 0%, transparent 100%)",
+                    "linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%)",
+                    "linear-gradient(180deg, rgba(59,130,246,0.1) 0%, transparent 100%)",
+                    "linear-gradient(270deg, rgba(59,130,246,0.1) 0%, transparent 100%)",
+                    "linear-gradient(360deg, rgba(59,130,246,0.1) 0%, transparent 100%)",
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              />
             </div>
-          </nav>
-        </motion.div>
+
+            <nav className="relative px-6 py-4">
+              <div className="flex items-center justify-between">
+                {/* Logo */}
+                <Link to="/" className="relative group flex-shrink-0">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative">
+                    <img
+                      src="https://www.electra.co.il/filestock/file/1502610340683-0.png"
+                      alt="Electra"
+                      className="h-[2.7rem] w-auto relative z-10 brightness-0 invert"
+                    />
+                    <motion.div
+                      className="absolute inset-0 -m-2 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl blur-xl opacity-0 group-hover:opacity-100"
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.div>
+                </Link>
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-0.5 flex-wrap justify-center flex-1 px-4">
+                  {navLinks.map((link, index) => {
+                    const active = isParentActive(link);
+                    const isHovered = hoveredIndex === index;
+                    const hasChildren = !!link.children;
+                    const isOpen = openDropdown === link.path;
+
+                    return (
+                      <div
+                        key={link.path}
+                        className="relative"
+                        onMouseEnter={() => { setHoveredIndex(index); if (hasChildren) setOpenDropdown(link.path); }}
+                        onMouseLeave={() => { setHoveredIndex(null); setOpenDropdown(null); }}
+                      >
+                        <Link to={link.path} className="relative block">
+                          <motion.div
+                            className="relative px-3 py-2 rounded-xl overflow-hidden"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <AnimatePresence>
+                              {(active || isHovered) && (
+                                <motion.div
+                                  layoutId={active && !hasChildren ? "activeBackground" : undefined}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className={`absolute inset-0 ${
+                                    active
+                                      ? "bg-white/30 backdrop-blur-md border border-white/40"
+                                      : "bg-white/20"
+                                  } rounded-xl`}
+                                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                />
+                              )}
+                            </AnimatePresence>
+
+                            <span className="relative z-10 font-semibold text-sm text-white flex items-center gap-1">
+                              {link.isIcon ? (
+                                <motion.div animate={{ rotate: isHovered ? [0, -10, 10, -10, 0] : 0 }} transition={{ duration: 0.5 }}>
+                                  <Home className="w-4 h-4" />
+                                </motion.div>
+                              ) : (
+                                <>
+                                  {link.label}
+                                  {hasChildren && (
+                                    <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                                  )}
+                                </>
+                              )}
+                            </span>
+
+                            {active && (
+                              <motion.div
+                                className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent blur-sm"
+                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                              />
+                            )}
+                          </motion.div>
+                        </Link>
+
+                        {/* Dropdown */}
+                        <AnimatePresence>
+                          {hasChildren && isOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                              className="absolute top-full left-0 mt-2 w-64 z-50"
+                            >
+                              <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-blue-500/20 rounded-xl blur-sm" />
+                              <div className="relative bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl overflow-hidden py-1">
+                                {link.children!.map((child, ci) => (
+                                  child.external ? (
+                                    <motion.a
+                                      key={child.path}
+                                      href={child.path}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: ci * 0.03 }}
+                                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                                      onClick={() => setOpenDropdown(null)}
+                                    >
+                                      {child.label}
+                                      <ExternalLink className="w-3 h-3 ml-auto opacity-50" />
+                                    </motion.a>
+                                  ) : (
+                                    <motion.div
+                                      key={child.path}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: ci * 0.03 }}
+                                    >
+                                      <Link
+                                        to={child.path}
+                                        className={`block px-4 py-2.5 text-sm transition-colors ${
+                                          isActive(child.path)
+                                            ? "text-white bg-blue-600/80"
+                                            : "text-gray-300 hover:text-white hover:bg-white/10"
+                                        }`}
+                                        onClick={() => setOpenDropdown(null)}
+                                      >
+                                        {child.label}
+                                      </Link>
+                                    </motion.div>
+                                  )
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Language Selector */}
+                <div className="hidden md:block relative flex-shrink-0">
+                  <motion.button
+                    onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative px-4 py-2.5 rounded-xl bg-gradient-to-r from-gray-100/80 to-gray-200/80 backdrop-blur-sm border border-white/40 shadow-lg flex items-center gap-2 group overflow-hidden"
+                  >
+                    <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100" transition={{ duration: 0.3 }} />
+                    <Globe className="w-4 h-4 relative z-10 text-gray-700 group-hover:text-white transition-colors" />
+                    <span className="font-semibold text-sm relative z-10 text-gray-700 group-hover:text-white transition-colors">
+                      {currentLanguage}
+                    </span>
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {showLanguageMenu && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setShowLanguageMenu(false)} />
+                        <motion.div
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                          className="absolute right-0 top-full mt-3 w-40 z-50"
+                        >
+                          <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-blue-500/20 rounded-xl blur-sm" />
+                          <div className="relative bg-white/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-2xl overflow-hidden">
+                            {languages.map((lang, i) => (
+                              <motion.button
+                                key={lang.code}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.05 }}
+                                onClick={() => { setCurrentLanguage(lang.code); setShowLanguageMenu(false); }}
+                                className={`relative w-full px-4 py-3 text-left font-semibold text-sm transition-all group ${currentLanguage === lang.code ? "text-white" : "text-gray-700 hover:text-gray-900"}`}
+                              >
+                                {currentLanguage === lang.code && (
+                                  <motion.div layoutId="languageActive" className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500" transition={{ type: "spring", stiffness: 380, damping: 30 }} />
+                                )}
+                                {currentLanguage !== lang.code && (
+                                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                )}
+                                <span className="relative z-10">{lang.name}</span>
+                              </motion.button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <motion.button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="md:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-gray-100/80 to-gray-200/80 backdrop-blur-sm border border-white/40 shadow-lg flex items-center justify-center group overflow-hidden"
+                >
+                  <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-100" transition={{ duration: 0.3 }} />
+                  <AnimatePresence mode="wait">
+                    {mobileMenuOpen ? (
+                      <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                        <X className="w-5 h-5 relative z-10 text-gray-700 group-hover:text-white transition-colors" />
+                      </motion.div>
+                    ) : (
+                      <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                        <Menu className="w-5 h-5 relative z-10 text-gray-700 group-hover:text-white transition-colors" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+              </div>
+            </nav>
+          </motion.div>
+        </div>
       </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Glass Panel */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -203,113 +354,140 @@ export function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-md z-40 md:hidden"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-80 max-w-full bg-gray-900 z-50 lg:hidden overflow-y-auto"
+              className="fixed top-24 right-4 w-[calc(100%-2rem)] max-w-sm z-50 md:hidden"
             >
-              <div className="flex items-center justify-between p-4 border-b border-white/10">
-                <img src="https://www.electra.co.il/filestock/file/1502610340683-0.png" alt="Electra" className="h-8 w-auto brightness-0 invert" />
-                <button onClick={() => setMobileMenuOpen(false)} className="text-gray-400 hover:text-white">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+              <div className="absolute -inset-[2px] bg-gradient-to-r from-blue-500/30 via-cyan-500/30 to-blue-500/30 rounded-2xl blur-xl" />
+              <div className="relative bg-white/80 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden max-h-[75vh] overflow-y-auto">
+                <div className="p-4 space-y-1">
+                  {navLinks.map((link, index) => {
+                    const active = isParentActive(link);
+                    const hasChildren = !!link.children;
+                    const isExpanded = expandedMobile === link.path;
 
-              <nav className="p-4 space-y-1">
-                {navLinks.map((link) => {
-                  const active = isParentActive(link);
-                  const hasChildren = !!link.children;
-                  const isExpanded = expandedMobile === link.path;
-
-                  return (
-                    <div key={link.path}>
-                      <div className="flex items-center">
-                        {link.isIcon ? (
-                          <Link
-                            to={link.path}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={`flex items-center gap-3 flex-1 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                              active ? "bg-blue-600 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"
-                            }`}
-                          >
-                            <Home className="w-4 h-4" />
-                            Strona główna
-                          </Link>
-                        ) : (
+                    return (
+                      <motion.div
+                        key={link.path}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.04 }}
+                      >
+                        <div className="flex items-center gap-1">
                           <Link
                             to={link.path}
                             onClick={() => !hasChildren && setMobileMenuOpen(false)}
-                            className={`flex-1 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                              active ? "bg-blue-600 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"
-                            }`}
+                            className="relative flex-1 block"
                           >
-                            {link.label}
+                            <motion.div whileTap={{ scale: 0.98 }} className="relative px-4 py-3 rounded-xl overflow-hidden">
+                              {active ? (
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500" />
+                              ) : (
+                                <div className="absolute inset-0 bg-gradient-to-r from-gray-100/60 to-gray-200/60 backdrop-blur-sm" />
+                              )}
+                              {active && (
+                                <motion.div
+                                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                  animate={{ x: ["-100%", "100%"] }}
+                                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                                />
+                              )}
+                              <div className="relative z-10 flex items-center gap-2">
+                                {link.isIcon && <Home className={`w-4 h-4 ${active ? "text-white" : "text-gray-700"}`} />}
+                                <span className={`font-semibold text-sm ${active ? "text-white" : "text-gray-700"}`}>
+                                  {link.isIcon ? "Strona główna" : link.label}
+                                </span>
+                              </div>
+                            </motion.div>
                           </Link>
-                        )}
-                        {hasChildren && (
-                          <button
-                            onClick={() => setExpandedMobile(isExpanded ? null : link.path)}
-                            className="p-2.5 text-gray-400 hover:text-white"
-                          >
-                            <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
-                          </button>
-                        )}
-                      </div>
+                          {hasChildren && (
+                            <button
+                              onClick={() => setExpandedMobile(isExpanded ? null : link.path)}
+                              className={`p-2.5 rounded-xl transition-colors ${active ? "text-blue-600" : "text-gray-500 hover:text-gray-800"}`}
+                            >
+                              <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                            </button>
+                          )}
+                        </div>
 
-                      {/* Mobile submenu */}
-                      <AnimatePresence>
-                        {hasChildren && isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="ml-4 mt-1 space-y-0.5 border-l border-white/10 pl-3">
-                              {link.children!.map((child) => (
-                                child.external ? (
-                                  <a
-                                    key={child.path}
-                                    href={child.path}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
-                                  >
-                                    {child.label}
-                                    <ExternalLink className="w-3 h-3 opacity-50" />
-                                  </a>
-                                ) : (
-                                  <Link
-                                    key={child.path}
-                                    to={child.path}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
-                                      isActive(child.path)
-                                        ? "text-blue-400 bg-blue-500/10"
-                                        : "text-gray-400 hover:text-white hover:bg-white/10"
-                                    }`}
-                                  >
-                                    {child.label}
-                                  </Link>
-                                )
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </nav>
+                        <AnimatePresence>
+                          {hasChildren && isExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="ml-3 mt-1 space-y-0.5 border-l-2 border-blue-200 pl-3 pb-1">
+                                {link.children!.map((child) => (
+                                  child.external ? (
+                                    <a
+                                      key={child.path}
+                                      href={child.path}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-gray-800 rounded-lg hover:bg-gray-100 transition-colors"
+                                    >
+                                      {child.label}
+                                      <ExternalLink className="w-3 h-3 opacity-50" />
+                                    </a>
+                                  ) : (
+                                    <Link
+                                      key={child.path}
+                                      to={child.path}
+                                      onClick={() => setMobileMenuOpen(false)}
+                                      className={`block px-3 py-2 text-sm rounded-lg transition-colors ${
+                                        isActive(child.path)
+                                          ? "text-blue-600 font-semibold bg-blue-50"
+                                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                                      }`}
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  )
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    );
+                  })}
+                </div>
 
-              <div className="p-4 border-t border-white/10 mt-4">
-                <p className="text-xs text-gray-500 text-center">© {new Date().getFullYear()} Electra M&E Polska</p>
+                <div className="px-4 pb-4 border-t border-white/20 pt-4">
+                  <div className="text-xs uppercase tracking-wider text-gray-400 mb-3 font-semibold">Język</div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {languages.map((lang, i) => (
+                      <motion.button
+                        key={lang.code}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 + i * 0.05 }}
+                        onClick={() => setCurrentLanguage(lang.code)}
+                        className="relative overflow-hidden rounded-xl"
+                      >
+                        <motion.div whileTap={{ scale: 0.95 }} className="relative px-3 py-2.5 text-center font-semibold text-sm">
+                          {currentLanguage === lang.code ? (
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500" />
+                          ) : (
+                            <div className="absolute inset-0 bg-gradient-to-r from-gray-100/60 to-gray-200/60" />
+                          )}
+                          <span className={`relative z-10 ${currentLanguage === lang.code ? "text-white" : "text-gray-700"}`}>
+                            {lang.code}
+                          </span>
+                        </motion.div>
+                      </motion.button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           </>
