@@ -85,7 +85,7 @@ export const api = {
     list: (params?: Record<string, string>) =>
       fetchItems<Projekt>('projekty', {
         'filter[opublikowany][_eq]': 'true',
-        'fields[]': '*,kategoria.nazwa',
+        fields: '*,kategoria.nazwa',
         ...params,
       }),
   },
@@ -105,22 +105,14 @@ export const api = {
         sort: '-data_publikacji',
         ...params,
       }),
+    getBySlug: async (slug: string): Promise<Aktualnosc | null> => {
+      const items = await fetchItems<Aktualnosc>('aktualnosci', { 'filter[slug][_eq]': slug });
+      return items[0] ?? null;
+    },
   },
   strony: {
     getBySlug: async (slug: string): Promise<Strona | null> => {
       const items = await fetchItems<Strona>('strony', { 'filter[slug][_eq]': slug });
-      return items[0] ?? null;
-    },
-  },
-  aktualnosci: {
-    list: (params?: Record<string, string>) =>
-      fetchItems<Aktualnosc>('aktualnosci', {
-        'filter[opublikowany][_eq]': 'true',
-        sort: '-data_publikacji',
-        ...params,
-      }),
-    getBySlug: async (slug: string): Promise<Aktualnosc | null> => {
-      const items = await fetchItems<Aktualnosc>('aktualnosci', { 'filter[slug][_eq]': slug });
       return items[0] ?? null;
     },
   },
