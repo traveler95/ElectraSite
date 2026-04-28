@@ -1,5 +1,42 @@
 /* Custom utilities for the Electra website */
 
+/* ── Box-angle effect (from original electra.co.pl) ─────────────────────
+   Two counter-rotated oversized panels create angled top/bottom edges.
+   The section itself must have NO background — adjacent sections clip it. */
+.box-angle-navy {
+  position: relative;
+}
+.box-angle-navy::before,
+.box-angle-navy::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  right: -60%;
+  background: #004a69;
+  z-index: -1;
+}
+.box-angle-navy::before { transform: rotate(4deg); }
+.box-angle-navy::after  { transform: rotate(-4deg); }
+
+.box-angle-dark {
+  position: relative;
+}
+.box-angle-dark::before,
+.box-angle-dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  right: -60%;
+  background: #111111;
+  z-index: -1;
+}
+.box-angle-dark::before { transform: rotate(4deg); }
+.box-angle-dark::after  { transform: rotate(-4deg); }
+
 /* Grid background pattern */
 .bg-grid-white\/\[0\.05\] {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
