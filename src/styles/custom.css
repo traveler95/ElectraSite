@@ -1,41 +1,24 @@
 /* Custom utilities for the Electra website */
 
-/* ── Box-angle effect (from original electra.co.pl) ─────────────────────
-   Two counter-rotated oversized panels create angled top/bottom edges.
-   The section itself must have NO background — adjacent sections clip it. */
-.box-angle-navy {
+/* ── Angled section (skewY technique — no overflow) ──────────────────────
+   A skewed absolutely-positioned background div creates diagonal edges
+   at the top and bottom of the section. overflow:hidden clips it cleanly. */
+.skew-section {
   position: relative;
+  overflow: hidden;
 }
-.box-angle-navy::before,
-.box-angle-navy::after {
-  content: '';
+.skew-section > .skew-bg {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60%;
-  right: -60%;
-  background: #004a69;
-  z-index: -1;
+  top: -15%;
+  bottom: -15%;
+  left: 0;
+  right: 0;
+  z-index: 0;
 }
-.box-angle-navy::before { transform: rotate(4deg); }
-.box-angle-navy::after  { transform: rotate(-4deg); }
-
-.box-angle-dark {
+.skew-section > *:not(.skew-bg) {
   position: relative;
+  z-index: 1;
 }
-.box-angle-dark::before,
-.box-angle-dark::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60%;
-  right: -60%;
-  background: #111111;
-  z-index: -1;
-}
-.box-angle-dark::before { transform: rotate(4deg); }
-.box-angle-dark::after  { transform: rotate(-4deg); }
 
 /* Grid background pattern */
 .bg-grid-white\/\[0\.05\] {
