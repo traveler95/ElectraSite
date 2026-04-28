@@ -21,8 +21,17 @@ import {
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { ProjectsCarousel } from "../components/ProjectsCarousel";
 import { ServicesGrid } from "../components/ServicesGrid";
+import { api, fileUrl, type Projekt, type Oferta } from "../../lib/directus";
 
 export function Home() {
+  const [projekty, setProjekty] = useState<Projekt[]>([]);
+  const [oferty, setOferty] = useState<Oferta[]>([]);
+
+  useEffect(() => {
+    api.projekty.list({ limit: '6' }).then(setProjekty).catch(() => {});
+    api.oferty.list().then(setOferty).catch(() => {});
+  }, []);
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,

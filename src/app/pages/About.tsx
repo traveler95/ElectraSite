@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import {
   Target,
   Eye,
@@ -10,8 +11,15 @@ import {
   Heart,
 } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { api, fileUrl, type CzlonekZarzadu } from "../../lib/directus";
 
 export function About() {
+  const [team, setTeam] = useState<CzlonekZarzadu[]>([]);
+
+  useEffect(() => {
+    api.zarzad.list().then(setTeam).catch(() => {});
+  }, []);
+
   const values = [
     {
       icon: Shield,
@@ -67,28 +75,6 @@ export function About() {
     },
   ];
 
-  const team = [
-    {
-      name: "Jan Kowalski",
-      position: "Chief Executive Officer",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
-    },
-    {
-      name: "Anna Nowak",
-      position: "Technical Director",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-    },
-    {
-      name: "Piotr Wiśniewski",
-      position: "Project Manager",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
-    },
-    {
-      name: "Magdalena Wójcik",
-      position: "Quality Assurance",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
-    },
-  ];
 
   return (
     <div className="bg-white">
@@ -310,28 +296,32 @@ export function About() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-gray-200">
-                  <ImageWithFallback
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-semibold text-lg text-gray-900">{member.name}</h3>
-                <p className="text-gray-600 text-sm">{member.position}</p>
-              </motion.div>
-            ))}
-          </div>
+          {team.length === 0 ? (
+            <p className="text-center text-gray-400">Brak danych o zarządzie.</p>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {team.map((member, index) => (
+                <motion.div
+                  key={member.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="aspect-square rounded-2xl overflow-hidden mb-4 bg-gray-200">
+                    <ImageWithFallback
+                      src={fileUrl(member.zdjecie)}
+                      alt={member.imie_nazwisko}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-lg text-gray-900">{member.imie_nazwisko}</h3>
+                  <p className="text-gray-600 text-sm">{member.stanowisko}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
+import { api } from "../../lib/directus";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -12,22 +13,29 @@ export function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [gdpr, setGdpr] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        message: "",
+    if (!gdpr) return;
+    setSubmitting(true);
+    try {
+      await api.kontakt.submit({
+        imie_nazwisko: formData.name,
+        email: formData.email,
+        telefon: formData.phone,
+        temat: formData.subject || formData.company,
+        zgoda_rodo: true,
       });
-    }, 3000);
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", company: "", subject: "", message: "" });
+      setGdpr(false);
+    } catch {
+      alert("Błąd podczas wysyłania. Spróbuj ponownie.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -249,12 +257,27 @@ export function Contact() {
                     />
                   </div>
 
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      id="gdpr"
+                      checked={gdpr}
+                      onChange={(e) => setGdpr(e.target.checked)}
+                      required
+                      className="mt-1"
+                    />
+                    <label htmlFor="gdpr" className="text-sm text-gray-600">
+                      Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z polityką prywatności. *
+                    </label>
+                  </div>
+
                   <button
                     type="submit"
-                    className="w-full px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                    disabled={submitting || !gdpr}
+                    className="w-full px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
-                    Send Message
+                    {submitting ? "Wysyłanie..." : "Send Message"}
                   </button>
                 </form>
               )}
